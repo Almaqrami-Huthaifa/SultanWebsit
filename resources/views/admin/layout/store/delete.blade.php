@@ -8,7 +8,7 @@
                     <!-- general form elements -->
                     <div class="card card-danger">                        
                         <!-- /.card-header -->                        
-                            <form role="form" method="POST" action={{ route('confirmDeletePro') }}>
+                            <form role="form" method="POST" action={{ route("confirmDeleteStore") }}>
                               <div class="card-header">
                                 <h3 class="card-title">Do you want to delete?</h3>
                               </div>

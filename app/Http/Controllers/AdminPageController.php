@@ -55,6 +55,8 @@ class AdminPageController extends Controller
         $product=new Product();
         $product->name=$request->productName;
         $product->price=$request->productPrice;
+        $product->quantity=$request->productquantity;
+        $product->statuse=$request->productstatuse== true?'0':'1';
         $product->discreptin=$request->ProDiscreption;
         $product->category_id = $request->category_id;
         $product->material_id= $request->material_id;

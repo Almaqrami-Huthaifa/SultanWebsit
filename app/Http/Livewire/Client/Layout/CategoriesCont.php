@@ -2,10 +2,28 @@
 
 namespace App\Http\Livewire\Client\Layout;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CategoriesCont extends Component
 {
+    public function adToCart(int $productId){
+        if(Auth::cheach()){
+
+            dd($productId);
+
+        }
+        else
+        {
+            $this->dispatchBrowserEvent('message',[
+            'text'=>'please login to add to cart',
+            'type'=>'info',
+            'status'=>401
+        ]);
+
+        }
+
+    }
     public $product,$category;
     public function mount($product , $category){
 

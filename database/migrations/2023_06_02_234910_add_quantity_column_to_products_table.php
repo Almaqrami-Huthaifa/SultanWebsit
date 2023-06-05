@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
-           $table->id();
-           $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('quantity');
+            $table->tinyInteger('statuse')->default('0')->comment('1=hidden, 0=visible');
         });
     }
 
@@ -22,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carts');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('quantity');
+            $table->dropColumn('statuse');
+        });
     }
 };

@@ -13,18 +13,21 @@
 <div class="container right-panel-active">
 	<!-- Sign Up -->
 	<div class="container__form container--signup">
-		<form action="#" class="form" id="form1">
+		<form method="POST" action="{{route("AddUser")}}" class="form" id="form1">
+			@csrf
 			<h2 class="form__title">Sign Up</h2>
-			<input type="text" placeholder="User Name" class="input" />
-			<input type="email" placeholder="Email" class="input" />
-			<input type="password" placeholder="Password" class="input" />
-			<button class="btn">Sign Up</button>
+			<input type="text" name="name" placeholder="User Name" class="input" />
+			<input type="email" name="email" placeholder="Email" class="input" />
+			<input type="password" name="password" placeholder="Password" class="input" />
+			<!--<input type="submit" class="btn" value="Sign Up"/>-->
+			<button class="btn">Sign In</button>
 		</form>
 	</div>
 
 	<!-- Sign In -->
 	<div class="container__form container--signin">
 		<form action="#" class="form" id="form2">
+			@csrf
 			<h2 class="form__title">Sign In</h2>
 			<input type="email" placeholder="Email" class="input" />
 			<input type="password" placeholder="Password" class="input" />
@@ -46,7 +49,7 @@
 	</div>
 </div>
 </body>
-<script src="{{asset('admin/js/signin.js')}}"></script>
+
 </html>
 
 

@@ -3,7 +3,7 @@
 
 
 
-<h1>hello Aroooooooooooosh</h1>
+<h1>Hello {{Auth()->user()->name}}</h1>
 
 
 @endsection

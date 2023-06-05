@@ -43,6 +43,15 @@
                                     <label for="inputSpentBudget">Product Price</label>
                                     <input type="number" name="productPrice" id="inputSpentBudget" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputSpentBudget">Product quantity</label>
+                                    <input type="number" name="productquantity" id="inputSpentBudget" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputSpentBudget">Product statuse</label>
+                                    <input type="checkbox" name="productstatuse" id="inputSpentBudget" class="form-control">
+                                </div>
+
                                 <!--
                           <div class="form-group">
                             <label for="inputName">Project Company</label>

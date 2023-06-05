@@ -160,60 +160,30 @@
                                     </a>
                                 </li>
 
-                                <
-                            </ul>
+                                < </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row isotope-grid">
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                    <!-- Block2 -->
-
-                    @csrf
-                    <input type="hidden" name="id" value="#" />
-
-                    <div class="block2">
-                        @foreach ($product as $pro)
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ $pro->image_path }}" alt="IMG-PRODUCT">
-
-                                <a href="#"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
+            @foreach ($product as $pro)
+                @csrf
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ $pro->image_path }}" class="img-fluid rounded-start " alt=" {{ $pro->name }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ $pro->name }}</h5>
+                                <p class="card-text">{{ $pro->store->name }}</p>
+                                <p class="card-text"><small class="text-muted">{{ $pro->price }}$</small></p>
+                                <p class="card-text"><small class="text-muted">{{ $pro->discreptin }}</small></p>
                             </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="# }}"
-                                        class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        {{ $pro->name }}
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-                                        {{ $pro->price }}$
-                                    </span>
-                                </div>
-
-                                <div class="block2-txt-child2 flex-r p-t-3">
-                                    <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                        <img class="icon-heart1 dis-block trans-04"
-                                            src="{{ asset('client/images/icons/icon-heart-01.png') }}" alt="ICON">
-                                        <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                            src="{{ asset('client/images/icons/icon-heart-02.png') }}" alt="ICON">
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
+                        </div>
                     </div>
-
                 </div>
+            @endforeach
 
-
-
-
-            </div>
         </div>
-    @endsection
+    </div>
+@endsection

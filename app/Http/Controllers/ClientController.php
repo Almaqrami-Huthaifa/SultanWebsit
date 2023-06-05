@@ -6,7 +6,10 @@ use App\Models\Category;
 use App\Models\material;
 use App\Models\Product;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class ClientController extends Controller
 {
@@ -14,14 +17,14 @@ class ClientController extends Controller
         $category=Category::get();
         return view('client.layout.master')->with('allcategories',$category);
     }
-    public function signinUP(){
+    public function signup(){
         return view('client.layout.ClientSigninUP');
     }
     public function HomePage(){
         $category=Category::get();
         $material=material::get();
         $store=Store::orderBy('id','desc')->take(3)->get();
-        $product=Product::orderBy('id','desc')->take(5)->get();
+        $product=Product::orderBy('id','desc')->take(3)->get();
         return view('client.layout.homPage')->with('allcategories',$category)->with('store',$store)->with('product',$product)->with('allmaterials',$material);
     }
     public function Catproducts($id){
@@ -89,11 +92,49 @@ class ClientController extends Controller
 
 
 
-    public function AllProduct($id)  
+    public function AllProduct()  
     {   $category=Category::get();
         $product=Product::get();
-        $material=material::find($id);
-        return view('client.layout.AllProduct')->with('allcategories',$category)->with('product',$product)->with('material',$material);
+        $material=material::get();
+        return view('client.layout.AllProduct',\compact('product','category'))->with('allcategories',$category)->with('product',$product)->with('material',$material);
+    }
+
+    public function searchProduct(Request $request){
+        if($request->search)
+        {
+            $searchProduct= Product::where('name','like','%'.$request->search.'%')->latest()->paginate(5);
+            return view('client.layout.search',\compact('searchProduct'));
+        }
+        else
+        {
+            return \redirect()->back();
+        }
+
+    }
+
+    public function searchcat(Request $request){
+        if($request->search)
+        {
+            $searchcat= Category::where('name','like','%'.$request->search.'%')->latest()->paginate(5);
+            return view('client.layout.searchCat',\compact('searchcat'));
+        }
+        else
+        {
+            return \redirect()->back();
+        }
+
+    }
+
+
+
+    public function AddUser(Request $request){
+        $x = new User();
+        $x->name =$request->name;
+        $x->email = $request->email;
+        $x->password=Hash::make($request->password);        
+        $x->save();
+        $x->addRole('User');
+        return redirect(route("login"));
     }
 
 

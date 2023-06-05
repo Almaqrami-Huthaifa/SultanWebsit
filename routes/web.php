@@ -7,6 +7,9 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\storeController;
+use App\Http\Livewire\CartComponent;
+use App\Http\Livewire\CheackComponent;
+use App\Http\Livewire\ShopComponent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,51 +29,23 @@ Route::get('/', function () {
     return view('welcome');
     
 });
+route::post('/register',[ClientController::class,'AddUser'])->name("AddUser");
+
 Route::get('/initAuth',[AppSettingsController::class,'generateAll'])->name('initAuth');
 /**=====================================admin master route */
-
-route::get('/adminMaster',[adminMasterController::class,'AdminMaster']);
-route::get('/signin',[adminMasterController::class,'login'])->name("login");
+route::get('/adminMaster',[adminMasterController::class,'AdminMaster'])->name("admindash");
+route::get('/login',[adminMasterController::class,'login'])->name("login");
+route::get('/signup',[adminMasterController::class,'signup'])->name("signup");
+route::get('/signup',[ClientController::class,'signup'])->name("signup");
+route::post('/save-user',[adminMasterController::class,'storeUser'])->name("save-user");
 route::post('tryLogin',[adminMasterController::class,'tryLogin'])->name("tryLogin");
-
-
-
-
+/*/route::get('/signinUP',[ClientController::class,'signinUP']);*/
 /**=====================================client master route */
 
-route::get('/clientMaster',[ClientController::class,'ClientMaster'])->name("clientMaster");
-route::get('/signinUP',[ClientController::class,'signinUP']);
-/**=====================================client pages */
-
-route::get('/clientHome',[ClientController::class,'HomePage'])->name("clientHome");
-route::get('/bestsall',[ClientController::class,'bestSalle'])->name("bestSall");
-route::get('/offers',[ClientController::class,'Offers'])->name("offers");
-route::get('/favoriet',[ClientController::class,'Favoreit'])->name("favoriet");
-route::get('/cart',[ClientController::class,'Cart'])->name("cart");
-route::get('/productdetails/{id}',[ClientController::class,'ProducrDetails'])->name("productDetails");
-route::get('/stores',[ClientController::class,'stores'])->name("stores");
-
-route::get('/contact',[ClientController::class,'contact'])->name("contact");
-route::get('/storedetails/{id}',[ClientController::class,'store_details'])->name("storedetails");
-route::get('/categoryCont/{id}',[ClientController::class,'Catproducts'])->name("Catproducts");
-route::get('/category',[ClientController::class,'categories'])->name("categories");
-route::get('/Category/{id}',[MaterialController::class,'Category'])->name("Category");
-route::get('/materials',[ClientController::class,'materials'])->name("materials");
-/**=============================================================================== new routes */
-route::post('/storStor2',[storeController::class,'storeStor']);
-
-route::get('/allproduct/{id}',[ClientController::class,'AllProduct'])->name("AllProduct");
 /**============================================================================= mazen */
-
 Route::group(['middleware'=>['auth','role:Admin']], function () {
     /**==============================================adminPage Route */
-    route::get('/stor',[AdminPageController::class,'stor'])->name("stor");
-
-
-
-
-
-
+route::get('/stor',[AdminPageController::class,'stor'])->name("stor");
 route::get('/forms',[AdminPageController::class,'Forms'])->name("forms");
 route::get('/createCategory',[AdminPageController::class,'createCategory'])->name("createCategory");
 route::post('/storCat',[AdminPageController::class,'storCat'])->name("storCat");
@@ -81,18 +56,7 @@ route::get('/CreateStore',[AdminPageController::class,'CreateStore'])->name("Cre
 route::post('/storeStor',[AdminPageController::class,'storeStor']);
 route::get('/StoreList',[storeController::class,'StoreList'])->name("StoreList");
 route::get('/AdminDashboard',[AdminPageController::class,'Dashboard'])->name("admindash");
-    
-});
-
-Route::group(['middleware'=>['auth','role:User']], function () {
-
-    
-});
-
-
-
-
-/**=================================================================== product*/
+   /**=================================================================== product*/
 route::post('/save_oldpro',[AdminPageController::class,'saveOldPro'])->name('saveOldPro');
 route::get('/editPro/{id}',[AdminPageController::class,'EditPro'])->name("EditPro");
 route::get('/deletePro/{id}',[AdminPageController::class,"DeletePro"])->name("DeletePro");
@@ -113,6 +77,37 @@ route::get('/editMat/{id}',[MaterialController::class,'EditMat'])->name("EditMat
 route::get('/deleteMat/{id}',[MaterialController::class,"DeleteMat"])->name("DeleteMat");
 route::get('/detailMat/{id}',[MaterialController::class,"DetailMat"])->name("DetailMat");
 route::post('/confirmDeleteMat',[MaterialController::class,'confirmDeleteMat'])->name('confirmDeleteMat');
+route::post('/storStor2',[storeController::class,'storeStor']);
+});
+Route::group(['middleware'=>['auth','role:User']], function () {
+ route::get('/clientMaster',[ClientController::class,'ClientMaster'])->name("clientMaster");
+/**=====================================client pages */
+route::get('/search',[ClientController::class,'searchProduct','searchcat'])->name("search");
+route::get('/clientHome',[ClientController::class,'HomePage'])->name("clientHome");
+route::get('/bestsall',[ClientController::class,'bestSalle'])->name("bestSall");
+route::get('/offers',[ClientController::class,'Offers'])->name("offers");
+route::get('/favoriet',[ClientController::class,'Favoreit'])->name("favoriet");
+route::get('/cart',[ClientController::class,'Cart'])->name("cart");
+route::get('/productdetails/{id}',[ClientController::class,'ProducrDetails'])->name("productDetails");
+route::get('/stores',[ClientController::class,'stores'])->name("stores");
+route::get('/contact',[ClientController::class,'contact'])->name("contact");
+route::get('/storedetails/{id}',[ClientController::class,'store_details'])->name("storedetails");
+route::get('/categoryCont/{id}',[ClientController::class,'Catproducts'])->name("Catproducts");
+route::get('/category',[ClientController::class,'categories'])->name("categories");
+route::get('/Category/{id}',[MaterialController::class,'Category'])->name("Category");
+route::get('/materials',[ClientController::class,'materials'])->name("materials");
+/**=============================================================================== new routes */
+route::get('/allproduct',[ClientController::class,'AllProduct'])->name("AllProduct");
+/**===================================================================livewire cart */
+route::get('/cartComp',CartComponent::class)->name("cartcomp");
+route::get('/cheackComp',CheackComponent::class)->name("cheackoutcomp");
+route::get('/shop',ShopComponent::class)->name("shop");
+});
+
+
+
+
+
 
 
 

@@ -4,6 +4,23 @@
 	<title>FOS main page</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/bootstrap.min.css')}}"/>
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/slick.css')}}"/>
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/slick-theme.css')}}"/>
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/nouislider.min.css')}}"/>
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/style.css')}}"/>
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{{asset('client/images/icons/favicon.png')}}"/>
 <!--===============================================================================================-->
@@ -86,7 +103,7 @@
 								<a href="{{route("materials")}}"> All categories</a>
 							</li>
 							<li>
-								<a href="{{route("categories")}}"> All materials</a>
+								<a href="{{route("AllProduct")}}"> Shop</a>
 							</li>
 							<li>
 								<a href="{{route("stores")}}"> Our Stores</a>
@@ -106,7 +123,7 @@
 						</div>
 							
 						<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="##">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify=><livewire:client.layout.cart-count/>
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
 						</div>
@@ -130,6 +147,7 @@
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
+				
 				<div class="flex-c-m h-full p-r-10">
 					<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
 						<i class="zmdi zmdi-search"></i>
@@ -162,11 +180,11 @@
 					<img src="{{asset('client/images/icons/icon-close2.png')}}" alt="CLOSE">
 				</button>
 
-				<form class="wrap-search-header flex-w p-l-15">
+				<form action="{{route("search")}}" method="GET" role="search" class="wrap-search-header flex-w p-l-15">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+					<input class="plh3" type="search" name="search" value="{{Request::get('search')}}" placeholder="Search...">
 				</form>
 			</div>
 		</div>
@@ -199,7 +217,7 @@
 
 					<li class="p-b-13">
 						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							My Account
+							
 						</a>
 					</li>
 
@@ -224,7 +242,7 @@
 
 				<div class="sidebar-gallery w-full p-tb-30">
 					<span class="mtext-101 cl5">
-						@ CozaStore
+						{{Auth()->user()->name}}
 					</span>
 
 					<div class="flex-w flex-sb p-t-36 gallery-lb">
@@ -541,111 +559,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-	<!-- Modal1 -->
-	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-		<div class="overlay-modal1 js-hide-modal1"></div>
-
-		<div class="container">
-			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="{{asset('client/images/icons/icon-close.png')}}" alt="CLOSE">
-				</button>
-
-				<div class="row">
-					<div class="col-md-6 col-lg-7 p-b-30">
-						<div class="p-l-25 p-r-30 p-lr-0-lg">
-							<div class="wrap-slick3 flex-sb flex-w">
-								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="{{asset('client/images/product-detail-01.jpg')}}">
-										<div class="wrap-pic-w pos-relative">
-											<img src="{{asset('client/images/product-detail-01.jpg')}}" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('client/images/product-detail-01.jpg')}}">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="{{asset('client/images/product-detail-02.jpg')}}">
-										<div class="wrap-pic-w pos-relative">
-											<img src="{{asset('client/images/product-detail-02.jpg')}}" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('client/images/product-detail-02.jpg')}}">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="{{asset('client/images/product-detail-03.jpg')}}">
-										<div class="wrap-pic-w pos-relative">
-											<img src="{{asset('client/images/product-detail-03.jpg')}}" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('client/images/product-detail-03.jpg')}}">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-5 p-b-30">
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
-							</h4>
-
-							<span class="mtext-106 cl2">
-								$58.79
-							</span>
-
-							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-							</p>
-							
-							<!--  -->
-							<div class="p-t-33">
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-204 flex-w flex-m respon6-next">
-										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-											Add to cart
-										</button>
-									</div>
-								</div>	
-							</div>
-
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 <!--===============================================================================================-->	
 	<script src="{{asset('client/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 <!--===============================================================================================-->
@@ -746,6 +659,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="{{asset('client/js/main.js')}}"></script>
-
+	<script src="{{asset('clientjs/jquery.min.js')}}"></script>
+	<script src="{{asset('clientjs/bootstrap.min.js')}}"></script>
+	<script src="{{asset('clientjs/slick.min.js')}}"></script>
+	<script src="{{asset('clientjs/nouislider.min.js')}}"></script>
+	<script src="{{asset('clientjs/jquery.zoom.min.js')}}"></script>
+	<script src="{{asset('clientjs/main2.js')}}"></script>
 </body>
 </html>

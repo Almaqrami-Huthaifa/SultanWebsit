@@ -27,13 +27,15 @@
 			<button class="btn">Sign In</button>
 		</form>
 	</div>
+	
 
 	<!-- Overlay -->
 	<div class="container__overlay">
 		<div class="overlay">
 			<div class="overlay__panel overlay--left">
-				<h2 class="form__title">welcom admin will you signin</h2>
+				<button class="btn" id="signIn">Sign In</button>
 			</div>
+
 		</div>
 	</div>
 </div>

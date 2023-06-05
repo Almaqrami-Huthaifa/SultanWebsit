@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AppSettingsController extends Controller
 {
     public function generateRoles(){
-        $roles=Role::get();
+        //Auth::user()->hasRole("Admin")
+        /*$roles=Role::get();
         if($roles->count()==0){            
             $admin=new Role();
             $admin->name='Admin';
@@ -22,6 +24,24 @@ class AppSettingsController extends Controller
             $user=new Role();
             $user->name='User';
             $user->display_name='User';
+            $user->description='حساب مستخدم';
+            $user->save();
+
+            return true;
+        }*/
+
+        $adminrole=Role::where('name','Admin')->get();
+        if($adminrole->count()==0){            
+            $admin=new Role();
+            $admin->name='Admin';
+            $admin->display_name='Admin';
+            $admin->description='إدارة المتجر';
+            $admin->save();
+        }
+        $userrole=Role::where('name','User')->get();
+        if($userrole->count()==0){
+            $user=new Role();
+            $user->name='User';
             $user->display_name='User';
             $user->description='حساب مستخدم';
             $user->save();
@@ -41,7 +61,8 @@ class AppSettingsController extends Controller
             $admin = new User();
             $admin->name = 'Admin';
             $admin->email = 'Admin@gmail.com';
-            $admin->password=Hash::make('Admin@2023');            
+            $admin->password=Hash::make('Admin@2023');                        
+            //$admin->addRole('Admin');
             $admin->save();
         }
         return true;

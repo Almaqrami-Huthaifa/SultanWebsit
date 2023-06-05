@@ -179,7 +179,6 @@
             <!-- Tab01 -->
             <div class="tab01">
                 <!-- Nav tabs -->
-
                 <ul class="nav nav-tabs" role="tablist">
                     @foreach ($allcategories as $category)
                         <li class="nav-item p-b-10">
